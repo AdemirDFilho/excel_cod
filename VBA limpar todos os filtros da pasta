@@ -1,0 +1,22 @@
+Sub LimparTodosOsFiltros()
+    Dim ws As Worksheet
+    Dim filterObj As Filter
+    Dim filterRange As Range
+    Dim col As Integer
+
+    ' Percorre todas as planilhas na pasta de trabalho
+    For Each ws In ThisWorkbook.Worksheets
+        ' Verifica se há um filtro ativo na planilha
+        If ws.AutoFilterMode Then
+            ' Define o range de células que têm os filtros aplicados
+            Set filterRange = ws.AutoFilter.Range
+            ' Percorre cada coluna no range do filtro
+            For col = 1 To filterRange.Columns.Count
+                ' Limpa o filtro na coluna, se houver
+                If ws.AutoFilter.Filters(col).On Then
+                    ws.Cells(1, col).AutoFilter Field:=col
+                End If
+            Next col
+        End If
+    Next ws
+End Sub
