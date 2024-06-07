@@ -1,0 +1,12 @@
+Sub LimparTodosOsFiltros()
+    Dim ws As Worksheet
+    
+    ' Percorre todas as planilhas na pasta de trabalho
+    For Each ws In ThisWorkbook.Worksheets
+        ' Verifica se há um filtro ativo na planilha
+        If ws.AutoFilterMode Then
+            ' Se houver um filtro, limpa-o
+            ws.AutoFilterMode = False
+        End If
+    Next ws
+End Sub
